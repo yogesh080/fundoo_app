@@ -38,6 +38,29 @@ namespace Fundoo_backend.Controllers
                 throw;
             }
         }
+        [HttpPost("Login")]
+        public ActionResult Login(UserLoginModel userLogin)
+        {
+            try
+            {
+                var result = userBL.Login(userLogin);
+                if (result != null)
+                {
+                    return Ok(new { success = true, message = "Login successfull", data = result });
+                }
+                else
+                {
+                    return BadRequest(new { success = false, message = "Login fail" });
+
+                }
+                 
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
 
 
     }
