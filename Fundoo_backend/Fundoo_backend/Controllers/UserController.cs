@@ -1,12 +1,15 @@
 ﻿using BusinessLayer.Interface;
 using CommonLayer.Model;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Fundoo_backend.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
+    
     public class UserController : ControllerBase // Interface
     {
         private readonly IUserBL userBL; // Object
@@ -15,7 +18,9 @@ namespace Fundoo_backend.Controllers
         {
             this.userBL = userBL;
         }
-        [HttpPost("Register")] // we are giving the route
+
+        [HttpPost]
+        [Route("Register")]
         public ActionResult Registration(UserRegistrationModel userRegistration)
         {
             try
@@ -38,7 +43,8 @@ namespace Fundoo_backend.Controllers
                 throw;
             }
         }
-        [HttpPost("Login")]
+        [HttpPost]
+        [Route("Login")]
         public ActionResult Login(UserLoginModel userLogin)
         {
             try
@@ -61,6 +67,7 @@ namespace Fundoo_backend.Controllers
                 throw;
             }
         }
+        
 
 
     }
