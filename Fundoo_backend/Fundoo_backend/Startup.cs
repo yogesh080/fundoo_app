@@ -125,7 +125,6 @@ namespace Fundoo_backend
             app.UseHttpsRedirection();
             app.UseRouting();
 
-            app.UseAuthentication();
 
 
 
