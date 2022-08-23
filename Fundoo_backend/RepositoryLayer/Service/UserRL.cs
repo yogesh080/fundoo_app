@@ -124,14 +124,14 @@ namespace RepositoryLayer.Service
                 throw;
             }
         }
-        public bool ResetLink(string Email, string Password, string confirmPassword)
+        public bool ResetLink(string Email, string password, string confirmPassword)
         {
             try
             {
-                if (Password.Equals(confirmPassword))
+                if (password.Equals(confirmPassword))
                 {
                     var EmailCheck = fundooContext.UserTable.FirstOrDefault(x => x.Email == Email);
-                    EmailCheck.Password = Password;
+                    EmailCheck.Password = password;
 
                     fundooContext.SaveChanges();
                     return true;

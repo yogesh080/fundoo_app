@@ -59,11 +59,11 @@ namespace BusinessLayer.Service
             }
         }
 
-        public bool ResetLink(string Email, string Password, string confirmPassword)
+        public bool ResetLink(string Email, string password, string confirmPassword)
         {
             try
             {
-                return userRL.ResetLink(Email, Password, confirmPassword);
+                return userRL.ResetLink(Email, password, confirmPassword);
             }
             catch (Exception)
             {

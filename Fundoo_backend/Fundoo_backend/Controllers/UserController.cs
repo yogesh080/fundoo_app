@@ -98,7 +98,7 @@ namespace Fundoo_backend.Controllers
         [Authorize]
         [HttpPost]
         [Route("ResetLink")]
-        public ActionResult ResetLink(string Password, string confirmPassword)
+        public ActionResult ResetLink(string password, string confirmPassword)
         {
 
             try
@@ -106,7 +106,7 @@ namespace Fundoo_backend.Controllers
 
                 var Email = User.FindFirst(ClaimTypes.Email).Value.ToString();
 
-                var result = userBL.ResetLink(Email, Password, confirmPassword);
+                var result = userBL.ResetLink(Email, password, confirmPassword);
 
                 if (result != null)
                 {
