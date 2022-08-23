@@ -3,6 +3,7 @@ using CommonLayer.Model;
 using RepositoryLayer.Context;
 using RepositoryLayer.Entity;
 using RepositoryLayer.Interface;
+using RepositoryLayer.Service;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -56,6 +57,20 @@ namespace BusinessLayer.Service
 
                 throw;
             }
+        }
+
+        public bool ResetLink(string Email, string Password, string confirmPassword)
+        {
+            try
+            {
+                return userRL.ResetLink(Email, Password, confirmPassword);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
 
     }

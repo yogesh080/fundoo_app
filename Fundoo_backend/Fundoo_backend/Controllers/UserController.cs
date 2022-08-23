@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RepositoryLayer.Service;
 using System;
+using System.Security.Claims;
 
 namespace Fundoo_backend.Controllers
 {
@@ -93,6 +94,38 @@ namespace Fundoo_backend.Controllers
                 throw;
             }
         }
+
+        [Authorize]
+        [HttpPost]
+        [Route("ResetLink")]
+        public ActionResult ResetLink(string Password, string confirmPassword)
+        {
+
+            try
+            {
+
+                var Email = User.FindFirst(ClaimTypes.Email).Value.ToString();
+
+                var result = userBL.ResetLink(Email, Password, confirmPassword);
+
+                if (result != null)
+                {
+                    return Ok(new { success = true, message = "REST LINK SEND SUCCESSFULL" });
+                }
+                else
+                {
+                    return BadRequest(new { success = false, message = "REST LINK SEND FAILED" });
+                }
+
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+
+        }
+
 
 
 
