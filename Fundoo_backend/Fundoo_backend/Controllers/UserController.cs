@@ -3,6 +3,8 @@ using CommonLayer.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RepositoryLayer.Service;
+using System;
 
 namespace Fundoo_backend.Controllers
 {
@@ -67,7 +69,32 @@ namespace Fundoo_backend.Controllers
                 throw;
             }
         }
-        
+        [HttpPost]
+        [Route("ForgetPassword")]
+        public ActionResult ForgetPassword (string Email)
+        {
+            try
+            {
+                var result = userBL.ForgetPassword(Email);
+                if (result != null)
+                {
+                    return Ok(new { success = true, message = "REST LINK SEND SUCCESSFULL ", data = result });
+                }
+                else
+                {
+                    return BadRequest(new { success = false, message = "REST LINK SEND FAILED" });
+
+                }
+
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
+
+
 
 
     }

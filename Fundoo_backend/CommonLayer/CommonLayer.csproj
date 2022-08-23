@@ -5,10 +5,7 @@
   </PropertyGroup>
 	
 	<ItemGroup>
-		<Folder Include="Model\" />
-	</ItemGroup>
-	
-	<ItemGroup>
+	  <PackageReference Include="Experimental.System.Messaging" Version="1.1.0" />
 	  <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.22.0" />
 	</ItemGroup>
 
