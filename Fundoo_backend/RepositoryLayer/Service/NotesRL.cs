@@ -66,7 +66,7 @@ namespace RepositoryLayer.Service
 
         }
 
-        public IEnumerable<NotesEntity> ReadNotes(long userId)
+        public IEnumerable<NotesEntity> ReadNotes(long userId)      //retrieve from collection
         {
             try
             {
@@ -170,6 +170,31 @@ namespace RepositoryLayer.Service
                 else
                 {
                     result.Archive = false;
+                    fundooContext.SaveChanges();
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool Trash(long noteId, long userId)
+        {
+            try
+            {
+                var result = fundooContext.NotesTable.Where(x => x.UserId == userId && x.NotesId == noteId).FirstOrDefault();
+
+                if (result.Trash == false)
+                {
+                    result.Trash = true;
+                    fundooContext.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    result.Trash = false;
                     fundooContext.SaveChanges();
                     return false;
                 }
