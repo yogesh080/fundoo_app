@@ -55,7 +55,8 @@ namespace CommonLayer.Model
                 EnableSsl = true,
             };
 
-            SMTP.Send("yogeshprojectdemo@gmail.com", "yogeshprojectdemo@gmail.com",Subject,Body);
+            //SMTP.Send("yogeshprojectdemo@gmail.com", "yogeshprojectdemo@gmail.com",Subject,Body);
+            SMTP.Send(mail);
             // from, recieveing, subject, body
             messageQ.BeginReceive();
         }
