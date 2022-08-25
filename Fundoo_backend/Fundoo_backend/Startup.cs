@@ -44,6 +44,10 @@ namespace Fundoo_backend
 
             services.AddTransient<IUserRL, UserRL>();
             services.AddTransient<IUserBL, UserBL>();
+
+            services.AddTransient<INotesRL, NotesRL>();
+            services.AddTransient<INotesBL, NotesBL>();
+
             services.AddSwaggerGen();
             services.AddSwaggerGen(opt =>
             {
