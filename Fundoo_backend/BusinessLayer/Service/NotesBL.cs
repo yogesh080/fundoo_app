@@ -41,6 +41,18 @@ namespace BusinessLayer.Service
                 throw;
             }
         }
+
+        public NotesEntity UpdateNote(NoteCreateModel noteModel, long NoteId, long userId)
+        {
+            try
+            {
+                return notesRL.UpdateNote(noteModel, NoteId, userId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 
 }
