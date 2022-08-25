@@ -49,5 +49,28 @@ namespace Fundoo_backend.Controllers
             }
 
         }
+
+        [HttpGet]
+        [Route("Read")]
+        public IActionResult ReadNotes()
+        {
+            try
+            {
+                long userId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "UserId").Value);
+                var result = notesBL.ReadNotes(userId);
+                if (result != null)
+                {
+                    return Ok(new { success = true, message = "NOTES RECIEVED", data = result });
+                }
+                else
+                {
+                    return BadRequest(new { success = false, message = "NOTES RECIEVED FAILED" });
+                }
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
     }
 }
