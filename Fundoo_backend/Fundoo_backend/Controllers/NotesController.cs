@@ -167,5 +167,32 @@ namespace Fundoo_backend.Controllers
             }
 
         }
+
+        [HttpPut]
+        [Route("Archive")]
+        public IActionResult Trash(long noteId)
+        {
+
+            try
+            {
+                long userID = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "UserId").Value);
+                var result = notesBL.Archive(noteId, userID);
+
+                if (result == true)
+                {
+                    return Ok(new { success = true, message = "NOTE TRANSH SUCCESSFULL!" });
+                }
+                else if (result == false)
+                {
+                    return Ok(new { success = true, message = "NOTE TRANSH FAIL!" });
+                }
+                return BadRequest(new { success = false, message = "Operation Fail." });
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+
+        }
     }
 }
