@@ -72,5 +72,28 @@ namespace Fundoo_backend.Controllers
                 throw;
             }
         }
+
+        [HttpPut]
+        [Route("Update")]
+        public IActionResult UpdateNote(NoteCreateModel noteModel, long NoteID)
+        {
+            try
+            {
+                long userId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "UserId").Value);
+                var result = notesBL.UpdateNote(noteModel, NoteID, userId);
+                if (result != null)
+                {
+                    return Ok(new { success = true, message = "NOTES UPDATE SUCCESSFULLY", data = result });
+                }
+                else
+                {
+                    return BadRequest(new { success = false, message = "NOTES UPDATE FAILED" });
+                }
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
     }
 }
