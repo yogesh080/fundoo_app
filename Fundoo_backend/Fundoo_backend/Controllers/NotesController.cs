@@ -169,14 +169,14 @@ namespace Fundoo_backend.Controllers
         }
 
         [HttpPut]
-        [Route("Archive")]
+        [Route("Trash")]
         public IActionResult Trash(long noteId)
         {
 
             try
             {
                 long userID = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "UserId").Value);
-                var result = notesBL.Archive(noteId, userID);
+                var result = notesBL.Trash(noteId, userID);
 
                 if (result == true)
                 {
