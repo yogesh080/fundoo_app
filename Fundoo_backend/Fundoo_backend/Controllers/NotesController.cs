@@ -117,5 +117,28 @@ namespace Fundoo_backend.Controllers
                 throw;
             }
         }
+
+        [HttpPut]
+        [Route("Pin")]
+        public IActionResult PinNotes(long noteId)
+        {
+            try
+            {
+                long userID = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "UserId").Value);
+                var result = notesBL.PinNotes(userID, noteId);
+                if (result != false)
+                {
+                    return Ok(new { success = true, message = "NOTE PIN" });
+                }
+                else
+                {
+                    return BadRequest(new { success = false, message = "NOTE CANNOT PIN" });
+                }
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
     }
 }
