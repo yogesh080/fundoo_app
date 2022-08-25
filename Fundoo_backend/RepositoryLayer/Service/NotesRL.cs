@@ -66,7 +66,7 @@ namespace RepositoryLayer.Service
 
         }
 
-        public IEnumerable<NotesEntity> ReadNotes(long userId)
+        public IEnumerable<NotesEntity> ReadNotes(long userId)      //retrieve from collection
         {
             try
             {
