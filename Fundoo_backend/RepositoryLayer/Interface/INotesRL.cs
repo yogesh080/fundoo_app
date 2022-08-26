@@ -1,4 +1,5 @@
 ﻿using CommonLayer.Model;
+using Microsoft.AspNetCore.Http;
 using RepositoryLayer.Entity;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,8 @@ namespace RepositoryLayer.Interface
         public bool PinNotes(long noteId, long userId);
         public bool Archive(long noteId, long userId);
         public bool Trash(long noteId, long userId);
+        public string Image(IFormFile image, long noteID, long userID);
+
 
 
 

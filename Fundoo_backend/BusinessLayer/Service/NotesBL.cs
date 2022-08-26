@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Interface;
 using CommonLayer.Model;
+using Microsoft.AspNetCore.Http;
 using RepositoryLayer.Entity;
 using RepositoryLayer.Interface;
 using RepositoryLayer.Service;
@@ -100,6 +101,19 @@ namespace BusinessLayer.Service
                 throw;
             }
 
+        }
+
+        public string Image(IFormFile image, long noteID, long userID)
+        {
+            try
+            {
+                return notesRL.Image(image, noteID, userID);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
     }
