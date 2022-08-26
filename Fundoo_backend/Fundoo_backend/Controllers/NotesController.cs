@@ -194,5 +194,27 @@ namespace Fundoo_backend.Controllers
             }
 
         }
+        [HttpPut]
+        [Route("Image")]
+        public IActionResult Image(IFormFile image, long NoteID)
+        {
+            try
+            {
+                long userID = Convert.ToInt32(User.Claims.FirstOrDefault(user => user.Type == "UserId").Value);
+                var result = notesBL.Image(image, NoteID, userID);
+                if (result != null)
+                {
+                    return Ok(new { success = true, message = result });
+                }
+                else
+                {
+                    return BadRequest(new { success = false, message = "Cannot upload image." });
+                }
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
     }
 }
