@@ -16,7 +16,7 @@ namespace BusinessLayer.Interface
         public bool PinNotes(long userId, long noteId);
         public bool Archive(long noteId, long userId);
         public bool Trash(long noteId, long userId);
-        public string Image(IFormFile image, long noteID, long userID);
+        public NotesEntity Image(IFormFile image, long noteID, long userID);
 
 
 

@@ -212,7 +212,7 @@ namespace RepositoryLayer.Service
             }
         }
 
-        public string Image(IFormFile image, long noteID, long userID)
+        public NotesEntity Image(IFormFile image, long noteID, long userID)
         {
             try
             {
@@ -233,7 +233,8 @@ namespace RepositoryLayer.Service
                     string imagePath = uploadResult.Url.ToString();
                     result.Image = imagePath;
                     fundooContext.SaveChanges();
-                    return "Image uploaded successfully";
+
+                    return result;
                 }
                 else
                 {

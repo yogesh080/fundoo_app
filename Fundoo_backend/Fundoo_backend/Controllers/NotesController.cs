@@ -204,7 +204,8 @@ namespace Fundoo_backend.Controllers
                 var result = notesBL.Image(image, NoteID, userID);
                 if (result != null)
                 {
-                    return Ok(new { success = true, message = result });
+
+                    return Ok(new { success = true, message = "Image uplaod successfully", data=result });
                 }
                 else
                 {

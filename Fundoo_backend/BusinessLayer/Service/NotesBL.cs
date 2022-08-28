@@ -103,7 +103,7 @@ namespace BusinessLayer.Service
 
         }
 
-        public string Image(IFormFile image, long noteID, long userID)
+        public NotesEntity Image(IFormFile image, long noteID, long userID)
         {
             try
             {
