@@ -12,6 +12,8 @@ using System.IO;
 using System.Linq;
 using System.Security.Principal;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Xml.Linq;
 
 namespace RepositoryLayer.Service
 {
@@ -22,6 +24,8 @@ namespace RepositoryLayer.Service
         private readonly FundooContext fundooContext;
 
         private readonly IConfiguration cloudinaryEntity;
+
+        public string regex_for_color = "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$";
 
 
 
@@ -247,18 +251,26 @@ namespace RepositoryLayer.Service
             }
         }
 
+
+
         public NotesEntity Color(long NoteID, string color)
         {
             try
             {
-
-                var result = fundooContext.NotesTable.First(x => x.NotesId == NoteID);
-
-                if (result != null)
+                if (Regex.IsMatch(color,regex_for_color))
                 {
-                    result.Color = color;
-                    fundooContext.SaveChanges();
-                    return result;
+                    var result = fundooContext.NotesTable.First(x => x.NotesId == NoteID);
+                    if (result != null)
+                    {
+                        result.Color = color;
+                        fundooContext.SaveChanges();
+                        return result;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+
                 }
                 else
                 {
