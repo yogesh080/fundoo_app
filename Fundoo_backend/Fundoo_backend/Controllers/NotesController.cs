@@ -217,5 +217,32 @@ namespace Fundoo_backend.Controllers
                 throw;
             }
         }
+
+        [HttpPut]
+        [Route("Color")]
+        public IActionResult Color(long NoteID, string color)
+        {
+
+            try
+            {
+                long userID = Convert.ToInt32(User.Claims.FirstOrDefault(user => user.Type == "UserId").Value);
+                var result = notesBL.Color(NoteID, color);
+
+                if (result != null)
+                {
+                    return Ok(new { success = true, message = "Color changed successfully" });
+                }
+                else
+                {
+                    return BadRequest(new { success = false, message = "Color not changed." });
+                }
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+
+        }
+
     }
 }
