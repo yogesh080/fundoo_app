@@ -8,6 +8,7 @@ using BusinessLayer.Service;
 using RepositoryLayer.Service;
 using RepositoryLayer.Interface;
 using RepositoryLayer.Entity;
+using System.Security.Claims;
 
 namespace Fundoo_backend.Controllers
 {
@@ -65,6 +66,31 @@ namespace Fundoo_backend.Controllers
             }
 
 
+        }
+
+
+        [HttpGet]
+        [Route("Read")]
+        public IActionResult ReadCollaborate()
+        {
+            try
+            {
+                //string userId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "UserId").Value);
+                string noteId = User.FindFirst(ClaimTypes.Email).Value.ToString();
+                var result = collaboratorBL.ReadCollaborate(noteId);
+                if (result != null)
+                {
+                    return Ok(new { success = true, message = "COLLABRATION EMAIL RECIEVED", data = result });
+                }
+                else
+                {
+                    return BadRequest(new { success = false, message = "COLLABRATION RECIEVED FAILED" });
+                }
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
         }
 
 

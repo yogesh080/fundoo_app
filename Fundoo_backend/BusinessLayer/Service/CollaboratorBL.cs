@@ -50,6 +50,19 @@ namespace BusinessLayer.Service
                 throw;
             }
         }
+        public IEnumerable<CollaboratorEntity> ReadCollaborate(string Email)
+
+        {
+            try
+            {
+                return collaboratorRL.ReadCollaborate(Email);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
     }
 }

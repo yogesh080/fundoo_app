@@ -10,6 +10,7 @@ namespace BusinessLayer.Interface
     {
         public CollaboratorEntity AddCollaborate(long notesId, string Email);
         public string DeleteCollaborate(long notesId, string Email);
+        public IEnumerable<CollaboratorEntity> ReadCollaborate(string Email);
 
     }
 }

@@ -8,6 +8,7 @@ using RepositoryLayer.Context;
 using RepositoryLayer.Interface;
 using CommonLayer.Model;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 
 namespace RepositoryLayer.Service
 {
@@ -67,6 +68,20 @@ namespace RepositoryLayer.Service
 
             }
             catch (Exception )
+            {
+                throw;
+            }
+        }
+        [HttpGet]
+        [Route("Get")]
+        public IEnumerable<CollaboratorEntity> ReadCollaborate(string Email)
+        {
+            try
+            {
+                var result = this.fundooContext.CollaboratorTable.Where( x => x.CollaboratedEmail == Email);
+                return result;
+            }
+            catch (Exception)
             {
                 throw;
             }
