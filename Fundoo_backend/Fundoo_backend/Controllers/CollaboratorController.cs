@@ -7,6 +7,7 @@ using System;
 using BusinessLayer.Service;
 using RepositoryLayer.Service;
 using RepositoryLayer.Interface;
+using RepositoryLayer.Entity;
 
 namespace Fundoo_backend.Controllers
 {
@@ -45,6 +46,24 @@ namespace Fundoo_backend.Controllers
 
                 throw;
             }
+
+        }
+        [HttpDelete]
+        [Route("Delete")]
+        public ActionResult DeleteCollaborate(long notesId, string Email)
+        {
+
+            long userId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "UserId").Value);
+            var result = collaboratorBL.DeleteCollaborate(notesId, Email);
+            if(result != null)
+            {
+                return Ok(new { success = true, message = "Collaborater Email deleted", data = result });
+            }
+            else
+            {
+                return BadRequest(new { success = false, message = "Collaborater Email not deleted" });
+            }
+
 
         }
 

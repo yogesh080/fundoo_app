@@ -9,6 +9,10 @@ namespace RepositoryLayer.Interface
     public interface ICollaboratorRL
     {
         public CollaboratorEntity AddCollaborate(long notesId, string Email);
+        public string DeleteCollaborate(long notesId, string Email);
+
+
+
 
     }
 }

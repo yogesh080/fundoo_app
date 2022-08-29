@@ -48,5 +48,28 @@ namespace RepositoryLayer.Service
                 throw;
             }
         }
+        public string DeleteCollaborate(long notesId, string Email)
+        {
+            try
+            {
+                var noteResult = fundooContext.CollaboratorTable.Where(x => x.NotesId == notesId && x.CollaboratedEmail == Email).FirstOrDefault();
+                if (noteResult != null)
+
+                {
+                    fundooContext.CollaboratorTable.Remove(noteResult);
+                    this.fundooContext.SaveChanges();
+                    return "Delete successfully" ;
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+            catch (Exception )
+            {
+                throw;
+            }
+        }
     }
 }
