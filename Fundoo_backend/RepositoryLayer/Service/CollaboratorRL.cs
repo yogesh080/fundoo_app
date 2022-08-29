@@ -22,26 +22,26 @@ namespace RepositoryLayer.Service
         }
 
 
-        public CollaboratorEntity AddCollaborate(long notesId, long userId, CollabResponseModel model)
+        public CollaboratorEntity AddCollaborate(long notesId, string Email)
         {
             try
             {
-                
-                    CollaboratorEntity collaborateEntity = new CollaboratorEntity();
-
-                    collaborateEntity.CollaboratorID = model.CollaboratorID;
-                    collaborateEntity.NotesId = model.NotesId;
-                    collaborateEntity.UserId = model.UserId;
-                    collaborateEntity.CollaboratedEmail = model.CollaboratedEmail;
-                    collaborateEntity.UserId = userId;
-
-                    fundooContext.CollaboratorTable.Add(collaborateEntity);
+                var noteResult = fundooContext.NotesTable.Where(x => x.NotesId == notesId).FirstOrDefault();
+                var emailResult = fundooContext.UserTable.Where(x => x.Email == Email).FirstOrDefault();
+                if (noteResult != null && emailResult != null)
+                {
+                    CollaboratorEntity collabEntity = new CollaboratorEntity();
+                    collabEntity.NotesId = noteResult.NotesId;
+                    collabEntity.CollaboratedEmail = emailResult.Email;
+                    collabEntity.UserId = emailResult.UserId;
+                    fundooContext.Add(collabEntity);
                     fundooContext.SaveChanges();
-
-                    return collaborateEntity;
-                
-
-
+                    return collabEntity;
+                }
+                else
+                {
+                    return null;
+                }
             }
             catch (Exception)
             {

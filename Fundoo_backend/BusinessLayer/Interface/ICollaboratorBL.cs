@@ -1,10 +1,16 @@
-﻿using System;
+﻿using CommonLayer.Model;
+using RepositoryLayer.Entity;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace BusinessLayer.Interface
 {
-    internal interface ICollaboratorBL
+    public interface ICollaboratorBL
     {
+        public CollaboratorEntity AddCollaborate(long notesId, string Email);
+        
+
+
     }
 }

@@ -20,12 +20,14 @@ namespace BusinessLayer.Service
             this.collaboratorRL = collaboratorRL;
         }
 
-        public CollabResponseModel AddCollaborate(long notesId, long userId, CollaboratedModel model)
+        public CollaboratorEntity AddCollaborate(long notesId, string Email)
+
+
         {
 
             try
             {
-                return collaboratorRL.AddCollaborate(notesId, userId, model);
+                return collaboratorRL.AddCollaborate(notesId,Email);
             }
             catch (Exception)
             {

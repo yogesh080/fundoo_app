@@ -23,19 +23,33 @@ namespace Fundoo_backend.Controllers
         }
         [HttpPost]
         [Route("Add")]
-        public ActionResult AddCollaborate(long notesId,CollabResponseModel model)
+        public ActionResult AddCollaborate(long notesId, string Email)
         {
-            long userId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "UserId").Value);
-
-            if (userId == 0 && notesId == 0)
+            try
             {
-                return BadRequest(new { Success = false, message = "Email Missing For Collaboration" });
+                
+                var result = collaboratorBL.AddCollaborate(notesId, Email);
+                if(result != null)
+                {
+                    return Ok(new { success = true, message = "CREATED SUCCESFULLY", data = result });
+                }
+                else
+                {
+                    return BadRequest(new { success = false, message = "CREATATION FAIL" });
+                }
+
+
+            }
+            catch (System.Exception)
+            {
+
+                throw;
             }
 
-            CollabResponseModel collaborate = collaboratorBL.AddCollaborate(notesId, userId, model);
-            return Ok(new { Success = true, message = "Collaboration Successfull ", userId });
-
         }
+
+
+
 
     }
 }

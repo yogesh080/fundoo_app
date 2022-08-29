@@ -8,9 +8,7 @@ namespace RepositoryLayer.Interface
 {
     public interface ICollaboratorRL
     {
-        //public CollabResponseModel AddCollaborate(long notesId, long UserId, CollaborationModel model);
-        public CollaboratorEntity AddCollaborate(long notesId, long userId, CollabResponseModel model);
-
+        public CollaboratorEntity AddCollaborate(long notesId, string Email);
 
     }
 }
