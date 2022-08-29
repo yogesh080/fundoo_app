@@ -75,7 +75,7 @@ namespace Fundoo_backend.Controllers
         {
             try
             {
-                //string userId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "UserId").Value);
+                
                 string noteId = User.FindFirst(ClaimTypes.Email).Value.ToString();
                 var result = collaboratorBL.ReadCollaborate(noteId);
                 if (result != null)
