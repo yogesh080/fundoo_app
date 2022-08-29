@@ -48,6 +48,11 @@ namespace Fundoo_backend
             services.AddTransient<INotesRL, NotesRL>();
             services.AddTransient<INotesBL, NotesBL>();
 
+            services.AddTransient<ICollaboratorRL, CollaboratorRL>();
+            services.AddTransient<ICollaboratorBL, CollaboratorBL>();
+
+
+
             services.AddSwaggerGen();
             services.AddSwaggerGen(opt =>
             {

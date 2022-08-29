@@ -5,6 +5,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20220829034006_third_migration.cs" />
+    <Compile Remove="Migrations\20220829034006_third_migration.Designer.cs" />
+    <Compile Remove="Migrations\20220829034530_third_migration.cs" />
+    <Compile Remove="Migrations\20220829034530_third_migration.Designer.cs" />
+    <Compile Remove="Migrations\20220829035205_third_migration.cs" />
+    <Compile Remove="Migrations\20220829035205_third_migration.Designer.cs" />
+    <Compile Remove="Migrations\20220829035714_third_migration.cs" />
+    <Compile Remove="Migrations\20220829035714_third_migration.Designer.cs" />
+    <Compile Remove="Migrations\20220829040406_third_migration.cs" />
+    <Compile Remove="Migrations\20220829040406_third_migration.Designer.cs" />
+    <Compile Remove="Migrations\20220829042903_third_migration.cs" />
+    <Compile Remove="Migrations\20220829042903_third_migration.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CloudinaryDotNet" Version="1.19.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
