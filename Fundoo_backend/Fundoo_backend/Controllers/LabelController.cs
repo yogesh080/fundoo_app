@@ -24,7 +24,7 @@ namespace Fundoo_backend.Controllers
 
         [HttpPost]
         [Route("Create")]
-        public ActionResult AddLabel(long userId,long notesId, string labelname)
+        public ActionResult AddLabel(long notesId, string labelname)
             
 
         {
@@ -32,7 +32,7 @@ namespace Fundoo_backend.Controllers
             {
                 long UserId = Convert.ToInt64(User.Claims.FirstOrDefault(e => e.Type == "UserId").Value);
 
-                var result = labelBL.AddLabel(userId,notesId, labelname);
+                var result = labelBL.AddLabel(notesId, labelname);
 
                 if (result != null)
                 {

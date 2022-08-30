@@ -18,12 +18,12 @@ namespace BusinessLayer.Service
             this.labelRL = labelRL;
         }
 
-        public NoteLabel AddLabel(long userId,long notesId, string labelname)
+        public NoteLabel AddLabel(long notesId, string labelname)
         {
 
             try
             {
-                return labelRL.AddLabel(userId,notesId, labelname);
+                return labelRL.AddLabel(notesId, labelname);
             }
             catch (Exception)
             {

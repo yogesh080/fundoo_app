@@ -8,7 +8,7 @@ namespace RepositoryLayer.Interface
 {
     public interface ILabelRL
     {
-        public NoteLabel AddLabel(long userId, long notesId, string labelname);
+        public NoteLabel AddLabel( long notesId, string labelname);
 
 
 

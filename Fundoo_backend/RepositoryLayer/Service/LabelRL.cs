@@ -18,11 +18,11 @@ namespace RepositoryLayer.Service
             this.fundooContext = fundooContext;
         }
 
-        public NoteLabel AddLabel(long userId,long notesId, string labelname)
+        public NoteLabel AddLabel(long notesId, string labelname)
         {
             try
             {
-                var noteResult = fundooContext.NotesTable.Where(x => x.NotesId == notesId && x.UserId == userId).FirstOrDefault();
+                var noteResult = fundooContext.NotesTable.Where(x => x.NotesId == notesId ).FirstOrDefault();
                 if (noteResult != null)
                 {
                     NoteLabel LabelEntity = new NoteLabel();
