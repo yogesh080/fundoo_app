@@ -36,11 +36,11 @@ namespace Fundoo_backend.Controllers
 
                 if (result != null)
                 {
-                    return Ok(new { success = true, message = "NOTES CREATED SUCCESFULLY", data = result });
+                    return Ok(new { success = true, message = "LABELED SUCCESFULLY", data = result });
                 }
                 else
                 {
-                    return BadRequest(new { success = false, message = "NOTES CREATATION FAIL" });
+                    return BadRequest(new { success = false, message = "LABELED FAIL" });
                 }
 
             }
