@@ -9,11 +9,13 @@ namespace RepositoryLayer.Interface
     public interface ILabelRL
     {
         public NoteLabel AddLabel(long userId, long notesId, string labelname);
-        public IEnumerable<NoteLabel> ReadLabel(long labelId);
         public string DeleteLabel(long labelId);
+        //public IEnumerable<NoteLabel> ReadLabel(long labelId);
 
 
         //public IEnumerable<NoteLabel> ReadLabel(long labelId, string labelname);
+        public IEnumerable<NoteLabel> ReadLabel(long labelId, long noteid);
+
         //public string DeleteLabel(long notesId, string labelname);
 
 

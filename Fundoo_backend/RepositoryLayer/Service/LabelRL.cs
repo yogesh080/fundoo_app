@@ -74,11 +74,11 @@ namespace RepositoryLayer.Service
 
         [HttpGet]
         [Route("Get")]
-        public IEnumerable<NoteLabel> ReadLabel(long labelId)
+        public IEnumerable<NoteLabel> ReadLabel(long labelId, long noteid)
         {
             try
             {
-                var result = this.fundooContext.LabelTable.Where(x => x.LabelId == labelId);
+                var result = this.fundooContext.LabelTable.Where(x => x.LabelId == labelId && x.NotesId == noteid);
                 return result;
             }
             catch (Exception)

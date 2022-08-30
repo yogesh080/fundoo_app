@@ -51,11 +51,11 @@ namespace BusinessLayer.Service
 
         
 
-        public IEnumerable<NoteLabel> ReadLabel(long labelId)
+        public IEnumerable<NoteLabel> ReadLabel(long labelId, long noteid)
         {
             try
             {
-                return labelRL.ReadLabel(labelId);
+                return labelRL.ReadLabel(labelId, noteid);
             }
             catch (Exception)
             {

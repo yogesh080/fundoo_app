@@ -12,11 +12,5 @@ namespace RepositoryLayer.Interface
         public string DeleteCollaborate(long notesId, string Email);
         public IEnumerable<CollaboratorEntity> ReadCollaborate(string Email);
 
-
-
-
-
-
-
     }
 }

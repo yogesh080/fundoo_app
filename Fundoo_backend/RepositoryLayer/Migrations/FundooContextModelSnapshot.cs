@@ -57,15 +57,12 @@ namespace RepositoryLayer.Migrations
                     b.Property<long>("NotesId")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("NotesId1")
-                        .HasColumnType("bigint");
-
                     b.Property<long>("UserId")
                         .HasColumnType("bigint");
 
                     b.HasKey("LabelId");
 
-                    b.HasIndex("NotesId1");
+                    b.HasIndex("NotesId");
 
                     b.HasIndex("UserId");
 
@@ -162,7 +159,9 @@ namespace RepositoryLayer.Migrations
                 {
                     b.HasOne("RepositoryLayer.Entity.NotesEntity", "Note")
                         .WithMany()
-                        .HasForeignKey("NotesId1");
+                        .HasForeignKey("NotesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("RepositoryLayer.Entity.UserEntity", "User")
                         .WithMany()
