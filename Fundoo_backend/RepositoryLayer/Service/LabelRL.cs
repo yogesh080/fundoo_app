@@ -1,4 +1,5 @@
 ﻿using CommonLayer.Model;
+using Microsoft.AspNetCore.Mvc;
 using RepositoryLayer.Context;
 using RepositoryLayer.Entity;
 using RepositoryLayer.Interface;
@@ -18,7 +19,7 @@ namespace RepositoryLayer.Service
             this.fundooContext = fundooContext;
         }
 
-        public NoteLabel AddLabel(long notesId, string labelname)
+        public NoteLabel AddLabel(long userId, long notesId, string labelname)
         {
             try
             {
@@ -37,6 +38,48 @@ namespace RepositoryLayer.Service
                 {
                     return null;
                 }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        public string DeleteLabel(long labelId)
+        {
+            try
+            {
+                var noteResult = fundooContext.LabelTable.Where(x =>  x.LabelId == labelId).FirstOrDefault();
+                if (noteResult != null)
+
+                {
+                    fundooContext.LabelTable.Remove(noteResult);
+                    this.fundooContext.SaveChanges();
+                    return "Delete successfully";
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+
+        [HttpGet]
+        [Route("Get")]
+        public IEnumerable<NoteLabel> ReadLabel(long labelId)
+        {
+            try
+            {
+                var result = this.fundooContext.LabelTable.Where(x => x.LabelId == labelId);
+                return result;
             }
             catch (Exception)
             {

@@ -8,7 +8,13 @@ namespace BusinessLayer.Interface
 {
     public interface ILabelBL
     {
-        public NoteLabel AddLabel( long notesId, string labelname);
+        public NoteLabel AddLabel(long userId, long notesId, string labelname);
+        public IEnumerable<NoteLabel> ReadLabel(long labelId);
+        public string DeleteLabel(long labelId);
+
+
+        //public IEnumerable<NoteLabel> ReadLabel(long labelId, string labelname);
+        //public string DeleteLabel(long notesId, string labelname);
 
 
 

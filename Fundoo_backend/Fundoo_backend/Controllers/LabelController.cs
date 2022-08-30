@@ -8,6 +8,7 @@ using BusinessLayer.Service;
 using RepositoryLayer.Entity;
 using RepositoryLayer.Context;
 using RepositoryLayer.Service;
+using RepositoryLayer.Interface;
 
 namespace Fundoo_backend.Controllers
 {
@@ -32,7 +33,7 @@ namespace Fundoo_backend.Controllers
             {
                 long UserId = Convert.ToInt64(User.Claims.FirstOrDefault(e => e.Type == "UserId").Value);
 
-                var result = labelBL.AddLabel(notesId, labelname);
+                var result = labelBL.AddLabel(UserId,notesId, labelname);
 
                 if (result != null)
                 {
@@ -49,6 +50,56 @@ namespace Fundoo_backend.Controllers
                 throw;
             }
 
+        }
+
+        //public string DeleteLabel(long labelId)
+        
+
+        [HttpDelete]
+        [Route("Delete")]
+        public ActionResult DeleteLabel(long labelId)
+        {
+
+            long userId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "UserId").Value);
+            var result = labelBL.DeleteLabel(labelId);
+            if (result != null)
+            {
+                return Ok(new { success = true, message = "Collaborater Email deleted", data = result });
+            }
+            else
+            {
+                return BadRequest(new { success = false, message = "Collaborater Email not deleted" });
+            }
+
+
+        }
+
+
+
+        
+
+
+        [HttpGet]
+        [Route("Read")]
+        public IActionResult ReadLabel(long labelId)
+        {
+            try
+            {
+                long userId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "UserId").Value);
+                var result = labelBL.ReadLabel(userId);
+                if (result != null)
+                {
+                    return Ok(new { success = true, message = "LABEL RECIEVED", data = result });
+                }
+                else
+                {
+                    return BadRequest(new { success = false, message = "LABEL RECIEVED FAILED" });
+                }
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
         }
     }
 }
