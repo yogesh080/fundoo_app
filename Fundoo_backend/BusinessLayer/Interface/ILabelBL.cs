@@ -11,7 +11,9 @@ namespace BusinessLayer.Interface
         public NoteLabel AddLabel(long userId, long notesId, string labelname);
         public string DeleteLabel(long labelId);
         //public IEnumerable<NoteLabel> ReadLabel(long labelId);
-        public IEnumerable<NoteLabel> ReadLabel(long labelId, long noteid);
+        //public IEnumerable<NoteLabel> ReadLabel(long labelId, long noteid);
+        public NoteLabel GetLablesWithId(long lableId, long userId);
+
 
 
         //public IEnumerable<NoteLabel> ReadLabel(long labelId, string labelname);

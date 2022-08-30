@@ -49,18 +49,32 @@ namespace BusinessLayer.Service
         }
 
 
-        
 
-        public IEnumerable<NoteLabel> ReadLabel(long labelId, long noteid)
+
+        //public IEnumerable<NoteLabel> ReadLabel(long labelId, long noteid)
+        //{
+        //    try
+        //    {
+        //        return labelRL.ReadLabel(labelId, noteid);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
+
+        public NoteLabel GetLablesWithId(long lableId, long userId)
         {
             try
             {
-                return labelRL.ReadLabel(labelId, noteid);
+                return labelRL.GetLablesWithId(lableId, userId);
             }
             catch (Exception)
             {
                 throw;
             }
+
         }
+
     }
 }

@@ -71,17 +71,33 @@ namespace RepositoryLayer.Service
         }
 
 
+        //public IEnumerable <NoteLabel> ReadLabel(long labelId, long noteid)
+        //{
+        //    try
+        //    {
+        //        var result = this.fundooContext.LabelTable.Where(x => x.LabelId == labelId && x.NotesId == noteid);
+        //        return result;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
 
-        [HttpGet]
-        [Route("Get")]
-        public IEnumerable<NoteLabel> ReadLabel(long labelId, long noteid)
+
+        public NoteLabel GetLablesWithId(long lableId, long userId)
         {
             try
             {
-                var result = this.fundooContext.LabelTable.Where(x => x.LabelId == labelId && x.NotesId == noteid);
-                return result;
+                var validUserId = this.fundooContext.UserTable.Where(e => e.UserId == userId);
+                if (validUserId != null)
+                {
+                    return this.fundooContext.LabelTable.FirstOrDefault(e => e.LabelId == lableId);
+                }
+
+                return null;
             }
-            catch (Exception)
+            catch (Exception )
             {
                 throw;
             }

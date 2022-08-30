@@ -81,12 +81,12 @@ namespace Fundoo_backend.Controllers
 
         [HttpGet]
         [Route("Read")]
-        public IActionResult ReadLabel(long labelId)
+        public IActionResult GetLablesWithId(long labelId)
         {
             try
             {
                 long userId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "UserId").Value);
-                var result = labelBL.ReadLabel(userId,labelId);
+                var result = labelBL.GetLablesWithId(userId, labelId);
                 if (result != null)
                 {
                     return Ok(new { success = true, message = "LABEL RECIEVED", data = result });
