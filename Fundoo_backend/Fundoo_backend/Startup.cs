@@ -51,6 +51,8 @@ namespace Fundoo_backend
             services.AddTransient<ICollaboratorRL, CollaboratorRL>();
             services.AddTransient<ICollaboratorBL, CollaboratorBL>();
 
+            services.AddTransient<ILabelRL, LabelRL>();
+            services.AddTransient<ILabelBL, LabelBL>();
 
 
             services.AddSwaggerGen();
