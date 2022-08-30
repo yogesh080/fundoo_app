@@ -52,7 +52,6 @@ namespace Fundoo_backend.Controllers
 
         }
 
-        //public string DeleteLabel(long labelId)
         
 
         [HttpDelete]
@@ -81,12 +80,12 @@ namespace Fundoo_backend.Controllers
 
         [HttpGet]
         [Route("Read")]
-        public IActionResult GetLablesWithId(long labelId)
+        public IActionResult ReadLabel(long labelId)
         {
             try
             {
                 long userId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "UserId").Value);
-                var result = labelBL.GetLablesWithId(userId, labelId);
+                var result = labelBL.ReadLabel(userId, labelId);
                 if (result != null)
                 {
                     return Ok(new { success = true, message = "LABEL RECIEVED", data = result });

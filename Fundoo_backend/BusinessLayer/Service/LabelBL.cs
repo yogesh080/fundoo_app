@@ -63,11 +63,11 @@ namespace BusinessLayer.Service
         //    }
         //}
 
-        public NoteLabel GetLablesWithId(long lableId, long userId)
+        public NoteLabel ReadLabel(long lableId, long userId)
         {
             try
             {
-                return labelRL.GetLablesWithId(lableId, userId);
+                return labelRL.ReadLabel(lableId, userId);
             }
             catch (Exception)
             {

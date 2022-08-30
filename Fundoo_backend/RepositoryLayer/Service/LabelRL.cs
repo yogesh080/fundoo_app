@@ -85,12 +85,12 @@ namespace RepositoryLayer.Service
         //}
 
 
-        public NoteLabel GetLablesWithId(long lableId, long userId)
+        public NoteLabel ReadLabel(long lableId, long userId)
         {
             try
             {
-                var validUserId = this.fundooContext.UserTable.Where(e => e.UserId == userId);
-                if (validUserId != null)
+                var UserId = this.fundooContext.UserTable.Where(e => e.UserId == userId);
+                if (UserId != null)
                 {
                     return this.fundooContext.LabelTable.FirstOrDefault(e => e.LabelId == lableId);
                 }

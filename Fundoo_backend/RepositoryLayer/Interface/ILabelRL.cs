@@ -15,7 +15,7 @@ namespace RepositoryLayer.Interface
 
         //public IEnumerable<NoteLabel> ReadLabel(long labelId, string labelname);
         //public IEnumerable<NoteLabel> ReadLabel(long labelId, long noteid);
-        public NoteLabel GetLablesWithId(long lableId, long userId);
+        public NoteLabel ReadLabel(long lableId, long userId);
 
 
         //public string DeleteLabel(long notesId, string labelname);
