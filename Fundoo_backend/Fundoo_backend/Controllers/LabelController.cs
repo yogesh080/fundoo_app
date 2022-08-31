@@ -74,10 +74,6 @@ namespace Fundoo_backend.Controllers
         }
 
 
-
-        
-
-
         [HttpGet]
         [Route("Read")]
         public IActionResult ReadLabel(long labelId)

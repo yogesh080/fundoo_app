@@ -52,12 +52,12 @@ namespace Fundoo_backend.Controllers
 
         [HttpGet]
         [Route("Read")]
-        public IActionResult ReadNotes()
+        public IActionResult ReadNotes(long noteId)
         {
             try
             {
                 long userId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "UserId").Value);
-                var result = notesBL.ReadNotes(userId);
+                var result = notesBL.ReadNotes(userId, noteId);
                 if (result != null)
                 {
                     return Ok(new { success = true, message = "NOTES RECIEVED", data = result });

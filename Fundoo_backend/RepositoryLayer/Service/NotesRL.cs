@@ -77,11 +77,11 @@ namespace RepositoryLayer.Service
 
         }
 
-        public IEnumerable<NotesEntity> ReadNotes(long userId)      //retrieve from collection
+        public IEnumerable<NotesEntity> ReadNotes(long userId, long noteId)      //retrieve from collection
         {
             try
             {
-                var result = this.fundooContext.NotesTable.Where(x => x.UserId == userId);
+                var result = this.fundooContext.NotesTable.Where(x => x.UserId == userId && x.NotesId == noteId);
                 return result;
             }
             catch (Exception)
