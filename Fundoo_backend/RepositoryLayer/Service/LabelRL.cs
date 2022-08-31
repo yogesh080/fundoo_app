@@ -23,7 +23,7 @@ namespace RepositoryLayer.Service
         {
             try
             {
-                var noteResult = fundooContext.NotesTable.Where(x => x.NotesId == notesId ).FirstOrDefault();
+                var noteResult = fundooContext.NotesTable.Where(x => x.NotesId == notesId).FirstOrDefault();
                 if (noteResult != null)
                 {
                     NoteLabel LabelEntity = new NoteLabel();
