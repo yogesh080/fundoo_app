@@ -72,13 +72,31 @@ namespace RepositoryLayer.Service
                 throw;
             }
         }
-        
-        public IEnumerable<CollaboratorEntity> ReadCollaborate(string Email)
+
+        //public IEnumerable<CollaboratorEntity> ReadCollaborate(string Email)
+        //{
+        //    try
+        //    {
+        //        var result = this.fundooContext.CollaboratorTable.Where( x => x.CollaboratedEmail == Email);
+        //        return result;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
+
+        public CollaboratorEntity ReadCollaborate(long colabId, long userId)
         {
             try
             {
-                var result = this.fundooContext.CollaboratorTable.Where( x => x.CollaboratedEmail == Email);
-                return result;
+                var UserId = this.fundooContext.UserTable.Where(e => e.UserId == userId);
+                if (UserId != null)
+                {
+                    return this.fundooContext.CollaboratorTable.FirstOrDefault(e => e.CollaboratorID == colabId);
+                }
+
+                return null;
             }
             catch (Exception)
             {

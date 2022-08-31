@@ -71,13 +71,15 @@ namespace Fundoo_backend.Controllers
 
         [HttpGet]
         [Route("Read")]
-        public IActionResult ReadCollaborate()
+        public IActionResult ReadCollaborate(long colabId)
         {
             try
             {
-                
-                string noteId = User.FindFirst(ClaimTypes.Email).Value.ToString();
-                var result = collaboratorBL.ReadCollaborate(noteId);
+
+                //string readnoteId = User.FindFirst(ClaimTypes.Email).Value.ToString();
+                long userId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "UserId").Value);
+
+                var result = collaboratorBL.ReadCollaborate(colabId, userId);
                 if (result != null)
                 {
                     return Ok(new { success = true, message = "COLLABRATION EMAIL RECIEVED", data = result });

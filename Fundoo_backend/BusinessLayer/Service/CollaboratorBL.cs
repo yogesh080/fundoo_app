@@ -50,12 +50,13 @@ namespace BusinessLayer.Service
                 throw;
             }
         }
-        public IEnumerable<CollaboratorEntity> ReadCollaborate(string Email)
+        //public IEnumerable<CollaboratorEntity> ReadCollaborate(long noteid, long colabId)
+        public CollaboratorEntity ReadCollaborate(long colabId, long userId)
 
         {
             try
             {
-                return collaboratorRL.ReadCollaborate(Email);
+                return collaboratorRL.ReadCollaborate(colabId, userId);
             }
             catch (Exception)
             {
