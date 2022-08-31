@@ -72,8 +72,7 @@ namespace RepositoryLayer.Service
                 throw;
             }
         }
-        [HttpGet]
-        [Route("Get")]
+        
         public IEnumerable<CollaboratorEntity> ReadCollaborate(string Email)
         {
             try
