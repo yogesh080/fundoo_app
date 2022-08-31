@@ -107,7 +107,7 @@ namespace RepositoryLayer.Service
         {
             try
             {
-                //var userid = fundooContext.UserTable.Where(x => x.UserId == Userid ).FirstOrDefault();
+                
                 var label = fundooContext.LabelTable.Where(x => x.LabelId == labelid).FirstOrDefault();
                 if (label != null)
                 {
