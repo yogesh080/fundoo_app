@@ -76,5 +76,20 @@ namespace BusinessLayer.Service
 
         }
 
+
+
+        public NoteLabel UpdateLabel( long labelid, string labelname)
+        {
+            try
+            {
+                return labelRL.UpdateLabel( labelid, labelname);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
     }
 }

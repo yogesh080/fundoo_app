@@ -102,5 +102,31 @@ namespace RepositoryLayer.Service
                 throw;
             }
         }
+
+        public NoteLabel UpdateLabel( long labelid, string labelname )
+        {
+            try
+            {
+                //var userid = fundooContext.UserTable.Where(x => x.UserId == Userid ).FirstOrDefault();
+                var label = fundooContext.LabelTable.Where(x => x.LabelId == labelid).FirstOrDefault();
+                if (label != null)
+                {
+
+                    label.LabelName = labelname;
+
+
+                    this.fundooContext.SaveChanges();
+                    return label;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

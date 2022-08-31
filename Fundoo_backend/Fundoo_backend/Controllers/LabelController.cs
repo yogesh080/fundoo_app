@@ -100,5 +100,31 @@ namespace Fundoo_backend.Controllers
                 throw;
             }
         }
+
+        
+        
+
+        [HttpPut]
+        [Route("Update")]
+        public IActionResult UpdateLabel( long labelid, string labelname)
+        {
+            try
+            {
+                long userId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "UserId").Value);
+                var result = labelBL.UpdateLabel( labelid, labelname);
+                if (result != null)
+                {
+                    return Ok(new { success = true, message = "LABEL UPDATE SUCCESSFULLY", data = result });
+                }
+                else
+                {
+                    return BadRequest(new { success = false, message = "LABEL UPDATE FAILED" });
+                }
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
     }
 }
