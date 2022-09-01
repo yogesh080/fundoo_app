@@ -80,8 +80,8 @@ namespace Fundoo_backend.Controllers
         {
             try
             {
-                long userId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "UserId").Value);
-                var result = labelBL.ReadLabel(userId, labelId);
+                long UserId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "UserId").Value);
+                var result = labelBL.ReadLabel(labelId, UserId);
                 if (result != null)
                 {
                     return Ok(new { success = true, message = "LABEL RECIEVED", data = result });
