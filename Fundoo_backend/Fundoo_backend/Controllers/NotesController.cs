@@ -5,22 +5,35 @@ using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using System;
-
-
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Caching.Distributed;
+using RepositoryLayer.Context;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
+using RepositoryLayer.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Fundoo_backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
 
     public class NotesController : ControllerBase
     {
         private readonly INotesBL notesBL;
+        private readonly IMemoryCache memoryCache;
+        private readonly FundooContext context;
+        private readonly IDistributedCache distributedCache;
 
-        public NotesController(INotesBL notesBL) 
+        public NotesController(INotesBL notesBL, IMemoryCache memoryCache, FundooContext context, IDistributedCache distributedCache) 
         {
             this.notesBL = notesBL;
+            this.memoryCache = memoryCache;
+            this.context = context;
+            this.distributedCache = distributedCache;
         }
         [Authorize]
         [HttpPost]
@@ -120,7 +133,6 @@ namespace Fundoo_backend.Controllers
             }
         }
         [Authorize]
-
         [HttpPut]
         [Route("Pin")]
         public IActionResult PinNotes(long noteId)
@@ -144,7 +156,6 @@ namespace Fundoo_backend.Controllers
             }
         }
         [Authorize]
-
         [HttpPut]
         [Route("Archive")]
         public IActionResult Archive(long noteId)
@@ -172,7 +183,6 @@ namespace Fundoo_backend.Controllers
 
         }
         [Authorize]
-
         [HttpPut]
         [Route("Trash")]
         public IActionResult Trash(long noteId)
@@ -200,7 +210,6 @@ namespace Fundoo_backend.Controllers
 
         }
         [Authorize]
-
         [HttpPut]
         [Route("Image")]
         public IActionResult Image(IFormFile image, long NoteID)
@@ -225,7 +234,6 @@ namespace Fundoo_backend.Controllers
             }
         }
         [Authorize]
-
         [HttpPut]
         [Route("Color")]
         public IActionResult Color(long NoteID, string color)
@@ -250,6 +258,31 @@ namespace Fundoo_backend.Controllers
                 throw;
             }
 
+        }
+
+        [HttpGet("redis")]
+        public async Task<IActionResult> GetAllNotesUsingRedisCache()
+        {
+            var cacheKey = "NotesList";
+            string serializedNotesList;
+            var notesList = new List<NotesEntity>();
+            var redisNotesList = await distributedCache.GetAsync(cacheKey);
+            if (redisNotesList != null)
+            {
+                serializedNotesList = Encoding.UTF8.GetString(redisNotesList);
+                notesList = JsonConvert.DeserializeObject<List<NotesEntity>>(serializedNotesList);
+            }
+            else
+            {
+                notesList = await context.NotesTable.ToListAsync();
+                serializedNotesList = JsonConvert.SerializeObject(notesList);
+                redisNotesList = Encoding.UTF8.GetBytes(serializedNotesList);
+                var options = new DistributedCacheEntryOptions()
+                    .SetAbsoluteExpiration(DateTime.Now.AddMinutes(10))
+                    .SetSlidingExpiration(TimeSpan.FromMinutes(2));
+                await distributedCache.SetAsync(cacheKey, redisNotesList, options);
+            }
+            return Ok(notesList);
         }
 
     }
