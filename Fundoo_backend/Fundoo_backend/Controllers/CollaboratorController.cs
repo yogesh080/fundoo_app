@@ -9,20 +9,35 @@ using RepositoryLayer.Service;
 using RepositoryLayer.Interface;
 using RepositoryLayer.Entity;
 using System.Security.Claims;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.Memory;
+using RepositoryLayer.Context;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Fundoo_backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class CollaboratorController : Controller
     {
         private readonly ICollaboratorBL collaboratorBL;
+        private readonly IMemoryCache memoryCache;
+        private readonly FundooContext context;
+        private readonly IDistributedCache distributedCache;
 
-        public CollaboratorController(ICollaboratorBL collaboratorBL)
+        public CollaboratorController(ICollaboratorBL collaboratorBL, IMemoryCache memoryCache, FundooContext context, IDistributedCache distributedCache)
         {
             this.collaboratorBL = collaboratorBL;
+            this.memoryCache = memoryCache;
+            this.context = context;
+            this.distributedCache = distributedCache;
         }
+        [Authorize]
         [HttpPost]
         [Route("Add")]
         public ActionResult AddCollaborate(long notesId, string Email)
@@ -49,6 +64,7 @@ namespace Fundoo_backend.Controllers
             }
 
         }
+        [Authorize]
         [HttpDelete]
         [Route("Delete")]
         public ActionResult DeleteCollaborate(long notesId, string Email)
@@ -68,7 +84,7 @@ namespace Fundoo_backend.Controllers
 
         }
 
-
+        [Authorize]
         [HttpGet]
         [Route("Read")]
         public IActionResult ReadCollaborate(long colabId)
@@ -93,6 +109,31 @@ namespace Fundoo_backend.Controllers
             {
                 throw;
             }
+        }
+
+        [HttpGet("redis")]
+        public async Task<IActionResult> GetAllCollaboratorUsingRedisCache()
+        {
+            var cacheKey = "CollabratorList";
+            string serializedcollaboratorList;
+            var collaboratorList = new List<CollaboratorEntity>();
+            var rediscollaboratorList = await distributedCache.GetAsync(cacheKey);
+            if (rediscollaboratorList != null)
+            {
+                serializedcollaboratorList = Encoding.UTF8.GetString(rediscollaboratorList);
+                collaboratorList = JsonConvert.DeserializeObject<List<CollaboratorEntity>>(serializedcollaboratorList);
+            }
+            else
+            {
+                collaboratorList = await context.CollaboratorTable.ToListAsync();
+                serializedcollaboratorList = JsonConvert.SerializeObject(collaboratorList);
+                rediscollaboratorList = Encoding.UTF8.GetBytes(serializedcollaboratorList);
+                var options = new DistributedCacheEntryOptions()
+                    .SetAbsoluteExpiration(DateTime.Now.AddMinutes(10))
+                    .SetSlidingExpiration(TimeSpan.FromMinutes(2));
+                await distributedCache.SetAsync(cacheKey, rediscollaboratorList, options);
+            }
+            return Ok(collaboratorList);
         }
 
 
