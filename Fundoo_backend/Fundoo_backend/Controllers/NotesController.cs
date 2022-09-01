@@ -22,6 +22,7 @@ namespace Fundoo_backend.Controllers
         {
             this.notesBL = notesBL;
         }
+        [Authorize]
         [HttpPost]
         [Route("Create")]
         public ActionResult CreateNote(NoteCreateModel notesCreateModel)
@@ -49,7 +50,7 @@ namespace Fundoo_backend.Controllers
             }
 
         }
-
+        [Authorize]
         [HttpGet]
         [Route("Read")]
         public IActionResult ReadNotes(long noteId)
@@ -72,7 +73,7 @@ namespace Fundoo_backend.Controllers
                 throw;
             }
         }
-
+        [Authorize]
         [HttpPut]
         [Route("Update")]
         public IActionResult UpdateNote(NoteCreateModel noteModel, long NoteID)
@@ -95,6 +96,7 @@ namespace Fundoo_backend.Controllers
                 throw;
             }
         }
+        [Authorize]
         [HttpDelete]
         [Route("Delete")]
         public IActionResult DeleteNotes(long NoteID)
@@ -117,6 +119,7 @@ namespace Fundoo_backend.Controllers
                 throw;
             }
         }
+        [Authorize]
 
         [HttpPut]
         [Route("Pin")]
@@ -140,6 +143,7 @@ namespace Fundoo_backend.Controllers
                 throw;
             }
         }
+        [Authorize]
 
         [HttpPut]
         [Route("Archive")]
@@ -167,6 +171,7 @@ namespace Fundoo_backend.Controllers
             }
 
         }
+        [Authorize]
 
         [HttpPut]
         [Route("Trash")]
@@ -194,6 +199,8 @@ namespace Fundoo_backend.Controllers
             }
 
         }
+        [Authorize]
+
         [HttpPut]
         [Route("Image")]
         public IActionResult Image(IFormFile image, long NoteID)
@@ -217,6 +224,7 @@ namespace Fundoo_backend.Controllers
                 throw;
             }
         }
+        [Authorize]
 
         [HttpPut]
         [Route("Color")]
