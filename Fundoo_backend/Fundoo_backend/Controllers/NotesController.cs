@@ -14,6 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RepositoryLayer.Entity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Fundoo_backend.Controllers
 {
@@ -28,12 +29,16 @@ namespace Fundoo_backend.Controllers
         private readonly FundooContext context;
         private readonly IDistributedCache distributedCache;
 
-        public NotesController(INotesBL notesBL, IMemoryCache memoryCache, FundooContext context, IDistributedCache distributedCache) 
+        private readonly ILogger<NotesController> _logger;
+
+        public NotesController(INotesBL notesBL, IMemoryCache memoryCache, FundooContext context, IDistributedCache distributedCache, ILogger<NotesController> logger) 
         {
             this.notesBL = notesBL;
             this.memoryCache = memoryCache;
             this.context = context;
             this.distributedCache = distributedCache;
+            _logger = logger;
+            _logger.LogDebug(1, "NLog injected into HomeController");
         }
         [Authorize]
         [HttpPost]
@@ -75,14 +80,17 @@ namespace Fundoo_backend.Controllers
                 if (result != null)
                 {
                     return Ok(new { success = true, message = "NOTES RECIEVED", data = result });
+                    throw new Exception("Error Occured");
                 }
                 else
                 {
+            
                     return BadRequest(new { success = false, message = "NOTES RECIEVED FAILED" });
                 }
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
+                _logger.LogError(ex.ToString());
                 throw;
             }
         }

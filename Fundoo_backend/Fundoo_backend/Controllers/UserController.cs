@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using RepositoryLayer.Service;
 using System;
 using System.Security.Claims;
+using Microsoft.Extensions.Logging;
 
 namespace Fundoo_backend.Controllers
 {
@@ -16,10 +17,13 @@ namespace Fundoo_backend.Controllers
     public class UserController : ControllerBase // Interface
     {
         private readonly IUserBL userBL; // Object
+        private readonly ILogger<UserController> _logger;
 
-        public UserController(IUserBL userBL) // Constructor
+
+        public UserController(IUserBL userBL, ILogger<UserController> logger) // Constructor
         {
             this.userBL = userBL;
+            _logger = logger;
         }
 
         [HttpPost]
@@ -56,6 +60,8 @@ namespace Fundoo_backend.Controllers
                 if (result != null)
                 {
                     return Ok(new { success = true, message = "Login successfull", data = result });
+                    throw new Exception("Error Occured");
+
                 }
                 else
                 {
@@ -64,8 +70,9 @@ namespace Fundoo_backend.Controllers
                 }
                  
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
+                _logger.LogError(ex.ToString());
 
                 throw;
             }
