@@ -87,7 +87,16 @@ namespace Fundoo_backend
                         new string[] { }
                     }
                 });
+            
                 
+            });
+
+            services.AddCors(option =>
+            {
+                option.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                });
             });
 
             services.AddAuthentication(x =>
@@ -132,11 +141,14 @@ namespace Fundoo_backend
             }
             app.UseHttpsRedirection();
 
+
             app.UseRouting();
 
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+            app.UseCors();
 
 
             app.UseEndpoints(endpoints =>
