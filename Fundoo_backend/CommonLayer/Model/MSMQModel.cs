@@ -41,9 +41,7 @@ namespace CommonLayer.Model
 
             string htmlbody;
 
-            htmlbody = "<body><p>Dear User,<br>" +
-                        "Copy below token to reset your password.<br></body>" +
-                        token;
+            htmlbody = $"Fundoo Notes Reset Password: <a href=https://localhost:4200/User/ResetPassword/{token}> Click Here</a>";
 
             mail.Body = htmlbody;
 

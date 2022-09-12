@@ -37,9 +37,14 @@ namespace RepositoryLayer.Service
 
                 fundooContext.UserTable.Add(user);
                 int res = fundooContext.SaveChanges();
-                if (res > 0)
+                
+                if (res > 0 )
                 {
                     return user;
+                }
+                else if (res == Convert.ToInt32(user.Email))
+                {
+                    return null;
                 }
                 else
                 {
