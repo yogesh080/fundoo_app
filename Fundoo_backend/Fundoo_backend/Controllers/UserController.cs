@@ -117,11 +117,11 @@ namespace Fundoo_backend.Controllers
 
                 if (result != null)
                 {
-                    return Ok(new { success = true, message = "REST LINK SEND SUCCESSFULL" });
+                    return Ok(new { success = true, message = "Reset successfully" });
                 }
                 else
                 {
-                    return BadRequest(new { success = false, message = "REST LINK SEND FAILED" });
+                    return BadRequest(new { success = false, message = "REST FAILED" });
                 }
 
             }
