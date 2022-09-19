@@ -31,11 +31,24 @@ namespace BusinessLayer.Service
             }
         }
 
-        public IEnumerable<NotesEntity> ReadNotes(long userId, long noteId)
+        //public IEnumerable<NotesEntity> ReadNotes(long userId, long noteId)
+        //{
+        //    try
+        //    {
+        //        return notesRL.ReadNotes(userId,noteId);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
+
+
+        public IEnumerable<NotesEntity> ReadAllNotes(long userId)
         {
             try
             {
-                return notesRL.ReadNotes(userId,noteId);
+                return notesRL.ReadAllNotes(userId);
             }
             catch (Exception)
             {

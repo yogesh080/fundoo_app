@@ -77,11 +77,26 @@ namespace RepositoryLayer.Service
 
         }
 
-        public IEnumerable<NotesEntity> ReadNotes(long userId, long noteId)      //retrieve from collection
+        //public IEnumerable<NotesEntity> ReadNotes(long userId, long noteId)      //retrieve from collection
+        //{
+        //    try
+        //    {
+        //        var result = this.fundooContext.NotesTable.Where(x => x.UserId == userId && x.NotesId == noteId);
+        //        return result;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
+
+
+
+        public IEnumerable<NotesEntity> ReadAllNotes(long userId)      //retrieve from collection
         {
             try
             {
-                var result = this.fundooContext.NotesTable.Where(x => x.UserId == userId && x.NotesId == noteId);
+                var result = this.fundooContext.NotesTable.Where(x => x.UserId == userId);
                 return result;
             }
             catch (Exception)
@@ -89,6 +104,8 @@ namespace RepositoryLayer.Service
                 throw;
             }
         }
+
+
 
         public NotesEntity UpdateNote(NoteCreateModel noteModel, long NoteId, long userId)
         {

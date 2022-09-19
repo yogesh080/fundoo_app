@@ -68,15 +68,42 @@ namespace Fundoo_backend.Controllers
             }
 
         }
+        //[Authorize]
+        //[HttpGet]
+        //[Route("Read")]
+        //public IActionResult ReadNotes(long noteId)
+        //{
+        //    try
+        //    {
+        //        long userId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "UserId").Value);
+        //        var result = notesBL.ReadNotes(userId, noteId);
+        //        if (result != null)
+        //        {
+        //            return Ok(new { success = true, message = "NOTES RECIEVED", data = result });
+        //            throw new Exception("Error Occured");
+        //        }
+        //        else
+        //        {
+            
+        //            return BadRequest(new { success = false, message = "NOTES RECIEVED FAILED" });
+        //        }
+        //    }
+        //    catch (System.Exception ex)
+        //    {
+        //        _logger.LogError(ex.ToString());
+        //        throw;
+        //    }
+        //}
+
         [Authorize]
         [HttpGet]
         [Route("Read")]
-        public IActionResult ReadNotes(long noteId)
+        public IActionResult ReadAllNotes()
         {
             try
             {
                 long userId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "UserId").Value);
-                var result = notesBL.ReadNotes(userId, noteId);
+                var result = notesBL.ReadAllNotes(userId);
                 if (result != null)
                 {
                     return Ok(new { success = true, message = "NOTES RECIEVED", data = result });
@@ -84,7 +111,7 @@ namespace Fundoo_backend.Controllers
                 }
                 else
                 {
-            
+
                     return BadRequest(new { success = false, message = "NOTES RECIEVED FAILED" });
                 }
             }
@@ -94,6 +121,7 @@ namespace Fundoo_backend.Controllers
                 throw;
             }
         }
+
         [Authorize]
         [HttpPut]
         [Route("Update")]

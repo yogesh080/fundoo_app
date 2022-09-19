@@ -7,6 +7,7 @@ using RepositoryLayer.Service;
 using System;
 using System.Security.Claims;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Cors;
 
 namespace Fundoo_backend.Controllers
 {
