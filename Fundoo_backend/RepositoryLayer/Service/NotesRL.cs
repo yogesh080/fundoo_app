@@ -25,7 +25,7 @@ namespace RepositoryLayer.Service
 
         private readonly IConfiguration cloudinaryEntity;
 
-        public string regex_for_color = "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$";
+        //public string regex_for_color = "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$";
 
 
 
@@ -274,8 +274,8 @@ namespace RepositoryLayer.Service
         {
             try
             {
-                if (Regex.IsMatch(color,regex_for_color))
-                {
+                //if (Regex.IsMatch(color,regex_for_color))
+                //{
                     var result = fundooContext.NotesTable.First(x => x.NotesId == NoteID);
                     if (result != null)
                     {
@@ -288,11 +288,11 @@ namespace RepositoryLayer.Service
                         return null;
                     }
 
-                }
-                else
-                {
-                    return null;
-                }
+                //}
+                //else
+                //{
+                //    return null;
+               // }
 
             }
             catch (Exception)
