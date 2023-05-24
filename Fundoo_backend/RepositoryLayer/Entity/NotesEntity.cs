@@ -16,15 +16,12 @@ namespace RepositoryLayer.Entity
         public string Color { get; set; }
         public DateTime Remainder { get; set; }
         public string Image { get; set; }
-<<<<<<< HEAD
         public string Archive { get; set; }
         public bool Pin { get; set; }
         public DateTime Trash { get; set; }
-=======
         public bool Archive { get; set; }
         public bool Pin { get; set; }
         public bool Trash { get; set; }
->>>>>>> createNote
         public DateTime CreateTime { get; set; }
         public DateTime ModifiedTime { get; set; }
         [ForeignKey("User")]
